@@ -1,0 +1,25 @@
+---
+# tasks file for apaches
+- name: update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install apache2
+  apt:
+    name: apache2
+    state: present
+
+- name: copy custom HTML file
+  copy: 
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure apache is rinning and enabled
+  service: 
+    name: apache2
+    state: started
+    enabled: true
+
